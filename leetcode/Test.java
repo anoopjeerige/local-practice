@@ -416,6 +416,53 @@ public class Test {
 		return digits;
 	}
 
+	public static String addBinary(String a, String b) {
+        
+        int carry = 0;
+        char[] first = a.toCharArray();
+        char[] second = b.toCharArray();
+        System.out.println(first + " " + second);
+        int n = first.length;
+        int m = second.length;
+        int i = n - 1;
+        int j = m - 1;
+        StringBuilder sb = new StringBuilder();
+        int x = Character.digit(first[i--], 2);
+        int y = Character.digit(second[j--], 2);
+
+        int sum = x + y + carry; 
+        carry = sum / 2;
+        int result = sum % 2;
+        System.out.println(x + " " + y + " " + sum + " " + carry + " " + result);
+        
+        sb.append(result);
+        
+        while(i >= 0 || j >= 0) {
+        	if (i >= 0) {
+        		x = Character.digit(first[i--], 2);
+        	} else {
+        		x = 0;
+        	}
+
+        	if (j >= 0) {
+        		y = Character.digit(second[j--], 2);
+        	} else {
+        		y = 0;
+        	}
+            sum = x + y + carry;
+            carry = sum / 2;
+            result = sum % 2;
+            System.out.println(x + " " + y + " " + sum + " " + carry + " " + result);
+            sb.append(result);
+        }
+
+        if (carry == 1) {
+        	sb.append(1);
+        }
+
+        return sb.reverse().toString();
+    }
+
 	/*
 	* Main function to test
 	*/
@@ -479,10 +526,15 @@ public class Test {
 		// }
 
 		// Test LeetCode 66. Plus One
-		while ((line = in.readLine()) != null) {
-			int[] test = stringToIntegerArray(line);
-			test = plusOne(test);
-			printArray(test);
-		}
+		// while ((line = in.readLine()) != null) {
+		// 	int[] test = stringToIntegerArray(line);
+		// 	test = plusOne(test);
+		// 	printArray(test);
+		// }
+
+		// Test 67 Add Binary
+		String a = "11";
+		String b = "1";
+		System.out.println(addBinary(a, b));
 	}
 }
