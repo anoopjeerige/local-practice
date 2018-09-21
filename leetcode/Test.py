@@ -281,6 +281,45 @@ class Solution:
         return result
 
 
+    def strStr(self, haystack, needle):
+        """
+        LeetCode 28. Implement strStr
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        
+        # if needle empty return 0
+        if not needle:
+            return 0
+        # if haystack empty return -1
+        if not haystack:
+            return -1
+        # if needle len > haystack len return -1
+        if len(needle) > len(haystack):
+            return -1
+
+        found = -1
+        first = needle[0]
+
+        for i in range(len(haystack)):
+            if haystack[i] == first:
+                k = i
+                match_len = 0
+                for j in range(len(needle)):
+                    if needle[j] != haystack[k]:
+                        break
+                    else:
+                        match_len += 1
+                    k += 1
+
+                if match_len == len(needle):
+                    found = i
+                    break
+
+        return found
+
+
 def main():
     """Main method to call"""
     lines = readlines()
@@ -322,6 +361,8 @@ def double_list(x):
 # Don't forget to return your new list!
     return x
 
+def test():
+    print(Solution().strStr("mississippi", "mississippi"))
 
 if __name__ == '__main__':
     # main()
@@ -380,5 +421,9 @@ if __name__ == '__main__':
     # print(Solution().findDiagonalOrder(nums))
     # nums = [[ 1, 2, 3 ],[ 4, 5, 6 ],[ 7, 8, 9 ]]
     # print(Solution().spiralOrder(nums))
-    print(Solution().generate(5))
+    #print(Solution().generate(5))
+
+    # Test LeetCode 28. Implement strStr
+    #print(Solution().strStr("mississippi", "issip"))
+
 
